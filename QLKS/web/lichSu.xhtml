@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Lịch Sử</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="Template/templateCaNhan.xhtml">
+                <ui:define name="tieu-de">
+                    <h3 style="text-align: center; color: #444; margin-bottom: 0px">Lịch Sử Đặt Phòng</h3>
+                </ui:define>
+
+                <ui:define name="noi-dung">
+                    <div class="col-md-9">
+                        <h:form id="form" class="form-dskhachsan">
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Có" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="Không" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>
+                            
+                            <p:dataList id="ds-lichsu" value="#{beanNguoiDung.listLichSu}" var="item" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated" paginatorPosition="bottom" paginatorAlwaysVisible="false" emptyMessage="Bạn chưa đặt phòng nào!">
+                                <div style="border: 1px solid #c0c0c0; border-radius: 5px; margin-top: 20px">
+                                    <div class="row" style="padding: 10px 0 10px 20px">
+                                        <div class="col-md-9">
+                                            <div style="font-weight: bold; color: #444">
+                                                <span style="font-size: 18px; color: #077812">#{item.tenPhong}</span> - 
+                                                <h:commandLink action = "#{beanNavigation.thongTinKhachSan(item.idKhachSan)}">
+                                                    <span style="font-size: 16px; color: #0077CC">#{item.tenKhachSan}</span>
+                                                </h:commandLink>
+                                            </div>
+                                            <div style="font-size: 14px; color: #444444; margin-bottom: 5px">Ngày đặt: #{item.ngayDat}</div>
+                                            <div style="font-size: 14px; margin-bottom: 5px">Đặt từ <span style="color: #007AD9; font-weight: bold">#{item.ngayDen}</span> đến <span style="color: #8A2BE2; font-weight: bold">#{item.ngayTra}</span></div>
+                                            <div style="font-size: 14px; color: #444444; margin-bottom: 5px">Dịch vụ: #{item.dichVu}</div>
+                                            <div style="font-size: 14px; margin-bottom: 5px">Tổng tiền: <span style="color: #E6004C; font-weight: bold">#{item.thanhTien} VND</span></div>
+                                            <div style="font-size: 14px; color: #444444; margin-bottom: 5px">Ghi chú: #{item.ghiChu}</div>
+                                        </div>
+                                        <div class="col-md-3" style="text-align: right">
+                                            <div style="margin: 10px 20px">
+                                                <h:panelGroup rendered="#{item.trangThai==0}">
+                                                    <p:commandButton update="msg ds-lichsu" title="Hủy đặt phòng này" value="Hủy Đặt" action="#{beanNguoiDung.huyDatPhong(item.id)}" ajax="true">
+                                                        <p:confirm header="Xác Nhận" message="Bạn có chắc chắn muốn hủy đặt phòng này không?" icon="pi pi-exclamation-triangle" />
+                                                    </p:commandButton>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{item.trangThai==1}">
+                                                    <p:commandButton style="border-color: red; background-color: red !important" disabled="true" value="Quá Hạn"></p:commandButton>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{item.trangThai==2}">
+                                                    <p:commandButton style="border-color: green; background-color: green !important" disabled="true" value="Đã Hủy"></p:commandButton>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p:dataList>
+                        </h:form>
+                    </div>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

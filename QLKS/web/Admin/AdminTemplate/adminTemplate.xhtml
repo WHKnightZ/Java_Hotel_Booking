@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="vi">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <div style="float: right; margin-right: 40px; margin-top: 20px">
+                        <h3>Chào #{sessionScope['TaiKhoan'].hoTen},</h3>
+                    </div>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="190" header="Menu" collapsible="true">
+                    <h:form>
+                        <h3>Quản Trị</h3>
+                        <p:menu toggleable="true">
+                            <p:submenu label="Danh Mục">
+                                <p:menuitem value="Tài Khoản" url="/QLKS/faces/Admin/adminTaiKhoan.xhtml" icon="pi pi-list" />
+                                <p:menuitem value="Thành Phố" url="/QLKS/faces/Admin/adminThanhPho.xhtml" icon="pi pi-list" />
+                                <p:menuitem value="Loại Khách Sạn" url="/QLKS/faces/Admin/adminLoaiKhachSan.xhtml" icon="pi pi-list" />
+                                <p:menuitem value="Khách Sạn" url="/QLKS/faces/Admin/adminKhachSan.xhtml" icon="pi pi-list"/>
+                                <p:menuitem value="Phòng" url="/QLKS/faces/Admin/adminPhong.xhtml" icon="pi pi-list"/>
+                            </p:submenu>
+                            <p:submenu label="Người Dùng">
+                                <p:menuitem value="Tài Khoản" url="#" icon="pi pi-user" />
+                                <p:menuitem value="Chưa Nghĩ Ra" url="#" icon="pi pi-cog" />
+                                <p:menuitem value="Đăng Xuất" action="#{beanNguoiDung.dangXuat()}" icon="pi pi-sign-out"/>
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <style>
+                        .ui-fileupload-content {
+                            display: none;
+                        }
+                        body .ui-fileupload .ui-fileupload-buttonbar {
+                            margin: 0;
+                            padding: 0;
+                            border: none;
+                            background-color: transparent;
+                        }
+                    </style>
+                    <ui:insert name="content">Content</ui:insert>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

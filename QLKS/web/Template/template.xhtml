@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      lang="vi">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+                <link type="text/css" rel="stylesheet" href="Content/css/bootstrap.min.css"/>
+                <script src="Content/js/bootstrap.min.js"></script>
+                <link type="text/css" rel="stylesheet" href="Content/css/style.css"/>
+                <link type="text/css" rel="stylesheet" href="Content/css/font.css"/>
+                <link type="text/css" rel="stylesheet" href="Content/css/carousel.css"/>
+                <!--<link href="https://fonts.googleapis.com/css?family=Quicksand&amp;display=swap" rel="stylesheet"/>-->
+                <!--&amp;-->
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" resizable="false" gutter="0" collapsible="false" >
+                    <ui:include src="header.xhtml"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="center" resizable="false" gutter="0">
+                    <ui:insert name="content">Content</ui:insert>
+                    <ui:include src="footer.xhtml"/>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
