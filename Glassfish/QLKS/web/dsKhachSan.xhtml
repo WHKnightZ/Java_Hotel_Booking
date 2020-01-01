@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Danh sách Khách sạn</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="Template/template.xhtml">
+                <ui:define name="content">
+
+                    <script>link_active = 2;</script>
+                    
+                    <div class="c80">
+                        <h3 style="text-align: center; color: #444; margin-bottom: 0px">Các Khách sạn tìm thấy</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div style="border: 1px solid #c0c0c0; border-radius: 5px; margin-top: 20px">
+                                    <h:form>
+                                        <div style="padding: 10px 0 8px 20px">
+                                            <span style="font-size: 16px; font-weight: bold">Chọn lọc theo</span>
+                                        </div>
+                                        <div class="khoi-loc">
+                                            <div class="head">Xếp hạng</div>
+                                            <c:forEach items="#{beanNavigation.listXepHang}" var="item">
+                                                <div>
+                                                    <p:selectBooleanCheckbox value="#{item.checked}" itemLabel="#{item.label}">
+                                                        <p:ajax update="form:ds-khachsan" listener="#{beanNavigation.locKhachSan()}" />
+                                                    </p:selectBooleanCheckbox>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="khoi-loc">
+                                            <div class="head">Loại khách sạn</div>
+                                            <c:forEach items="#{beanNavigation.listLoaiKhachSan}" var="item">
+                                                <div>
+                                                    <p:selectBooleanCheckbox value="#{item.checked}" itemLabel="#{item.label}">
+                                                        <p:ajax update="form:ds-khachsan" listener="#{beanNavigation.locKhachSan()}" />
+                                                    </p:selectBooleanCheckbox>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="khoi-loc">
+                                            <div class="head">Bữa ăn</div>
+                                            <c:forEach items="#{beanNavigation.listBuaAn}" var="item">
+                                                <div>
+                                                    <p:selectBooleanCheckbox value="#{item.checked}" itemLabel="#{item.label}">
+                                                        <p:ajax update="form:ds-khachsan" listener="#{beanNavigation.locKhachSan()}" />
+                                                    </p:selectBooleanCheckbox>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="khoi-loc">
+                                            <div class="head">Cách trung tâm</div>
+                                            <c:forEach items="#{beanNavigation.listCachTrungTam}" var="item">
+                                                <div>
+                                                    <p:selectBooleanCheckbox value="#{item.checked}" itemLabel="#{item.label}">
+                                                        <p:ajax update="form:ds-khachsan" listener="#{beanNavigation.locKhachSan()}" />
+                                                    </p:selectBooleanCheckbox>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="khoi-loc">
+                                            <div class="head">Giáp biển</div>
+                                            <c:forEach items="#{beanNavigation.listGiapBien}" var="item">
+                                                <div>
+                                                    <p:selectBooleanCheckbox value="#{item.checked}" itemLabel="#{item.label}">
+                                                        <p:ajax update="form:ds-khachsan" listener="#{beanNavigation.locKhachSan()}" />
+                                                    </p:selectBooleanCheckbox>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <h:form id="form" class="form-dskhachsan">
+                                    <p:dataList id="ds-khachsan" value="#{beanNavigation.listKhachSan}" var="item" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" paginatorPosition="bottom" paginatorAlwaysVisible="false" emptyMessage="Không tồn tại Khách sạn bạn mong muốn">
+                                        <h:commandLink class="link-khachsan" action="#{beanNavigation.thongTinKhachSan(item.id)}">
+                                            <div class="div-khachsan" style="height: 240px; border: 1px solid #c0c0c0; border-radius: 5px; margin-top: 20px">
+                                                <div class="row">
+                                                    <div class="col-md-4" style="margin: 20px 0 0 20px; width: 240px">
+                                                        <div style="border-radius: 3px; width: 220px; overflow: hidden">
+                                                            <img style="height: 200px" src="Content/Images/KhachSan/#{item.id}.jpg" alt="Img"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="margin: 20px 0 0 20px; width: 480px">
+                                                        <div style="font-size: 18px; font-weight: bold; color: #0077CC">#{item.ten}</div>
+                                                        <div style="font-size: 14px; color: #666666 "><span style="font-weight: bold; color: #077812">#{item.tenThanhPho}</span> - Cách trung tâm: #{item.cachTrungTam} m</div>
+                                                        <div style="font-size: 14px; color: #777777">#{item.tenLoaiKhachSan}</div>
+                                                        <div style="font-size: 14px">Giáp biển: #{item.giapBien?"Có":"Không"}</div>
+                                                        <div class="danh-gia-star">#{item.danhGia} &#9733;</div>
+                                                        <div class="danh-gia-label">#{beanKhachSan.strDanhGia[item.danhGia]}</div>
+                                                        <div style="font-size: 13px; color: #666666">#{item.moTa}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:commandLink>
+                                    </p:dataList>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

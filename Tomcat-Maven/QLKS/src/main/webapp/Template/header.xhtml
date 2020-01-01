@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <p:growl id="msg" showDetail="true"/>
+
+    <div style="background-color: #003580;">
+        <a href="faces/index.xhtml"><img src="Content/Images/Logo.png" width="299" height="62" style="margin: 10px 0px 5px 240px"/></a>
+        <ui:include src="formDangNhap.xhtml"/>
+        <div jsf:id="head-dangnhap" style="float: right; margin-right: 60px; margin-top: 30px">
+            <c:choose>
+                <c:when test="#{sessionScope['TaiKhoan'] == null}">
+                    <h:form>
+                        <div class="header-right">
+                            <span style="margin-right: 30px; color: white; font-weight: 500">Chào Khách,</span>
+                            <p:commandButton value="Đăng nhập" update="dangnhap" oncomplete="PF('dialog_dangnhap').show();" style="width: 95px; height: 30px; font-size: 13px !important; margin-right: 15px" ajax="true" />
+                            <p:commandButton value="Đăng ký" update="dangky" oncomplete="PF('dialog_dangky').show();" style="width: 95px; height: 30px; font-size: 13px !important; margin-right: 20px" ajax="true" />
+                        </div>
+                    </h:form>
+                </c:when>
+                <c:otherwise>
+                    <h:form>
+                        <span style="margin-right: 20px; color: white; font-weight: bold">Chào #{sessionScope['TaiKhoan'].hoTen},</span>
+                        <p:commandLink style="color: #00BBFF; font-weight: bold" value="Đăng Xuất" action="#{beanNguoiDung.dangXuat()}"/>
+                    </h:form>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        <div class="c80">
+            <div class="topnav">
+                <h:form id="form-nav">
+                    <h:commandLink id="link-1" action="#{beanNavigation.trangChu()}" value="Trang chủ"></h:commandLink>
+                    <h:commandLink id="link-2" action="#{beanNavigation.toanBoKhachSan()}" value="Khách sạn"></h:commandLink>
+                    <p:commandLink id="link-3" action="#{beanNguoiDung.caNhan()}" value="Cá nhân" update="msg"></p:commandLink>
+                    <h:commandLink id="link-4" action="#{beanNavigation.tinTuc()}" value="Tin tức"></h:commandLink>
+                    <h:commandLink id="link-5" action="#{beanNavigation.lienHe()}" value="Liên hệ"></h:commandLink>
+                </h:form>
+            </div> 
+        </div>
+    </div>
+    
+    <script>var link_active = 1;</script>
+    
+</ui:composition>

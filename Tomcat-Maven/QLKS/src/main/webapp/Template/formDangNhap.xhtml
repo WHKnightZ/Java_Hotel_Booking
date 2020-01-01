@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <p:dialog id="dangnhap" widgetVar="dialog_dangnhap" modal="true" resizable="false" width="500" height="280" header="Đăng Nhập" showEffect="fade" hideEffect="fade" closable="true" appendTo="@(body)" style="text-align: center">
+        <h:form>
+            <div class="form-dang-nhap">
+                <p:outputLabel value="Tài Khoản"/><br/>
+                <p:inputText style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.tenTaiKhoan}" placeholder="Tên Tên Khoản ..."/><br/>
+                <p:outputLabel value="Mật Khẩu"/><br/>
+                <p:password style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.matKhau}" placeholder="Mật Khẩu ..."/><br/>
+                <div style="margin: 10px 0px 10px 5px">
+                    <p:selectBooleanCheckbox style="margin-right: 15px"/>
+                    <span>Tự động đăng nhập</span>
+                </div>
+                <p:commandButton value="Đăng Nhập" update="msg head-dangnhap" action="#{beanNguoiDung.dangNhap()}" style="width: 100%"/><br/><br/>
+                <span>Nếu chưa có tài khoản, </span><p:commandLink value="Đăng Ký"/>
+            </div>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog id="dangky" widgetVar="dialog_dangky" modal="true" resizable="false" width="600" height="580" header="Đăng Ký" showEffect="fade" hideEffect="fade" closable="true" appendTo="@(body)" style="text-align: center">
+        <h:form>
+            <div class="form-dang-ky">
+                <p:outputLabel value="Tài Khoản"/><br/>
+                <p:inputText style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.tenTaiKhoan}" placeholder="Tên Tên Khoản ..."/><br/>
+                <p:outputLabel value="Mật Khẩu"/><br/>
+                <p:password style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.matKhau}" placeholder="Mật Khẩu ..."/><br/>
+                <p:outputLabel value="Nhập lại Mật Khẩu"/><br/>
+                <p:password style="width: 100%" value="#{beanNguoiDung.nhapLaiMatKhau}" placeholder="Nhập lại Mật Khẩu ..."/><br/>
+                <p:outputLabel value="Họ Tên"/><br/>
+                <p:inputText style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.hoTen}" placeholder="Tên của bạn ..."/><br/>
+                <div style="margin: 15px 0px 5px 5px">
+                    <p:outputLabel value="Giới Tính"/>
+                    <p:selectBooleanCheckbox value="#{beanNguoiDung.taiKhoanDangNhap.gioiTinh}" style="margin: 0 15px 0 15px"/>
+                    <span>Tích vào nếu là Nam</span>
+                </div>
+                <p:outputLabel value="Số Điện Thoại"/><br/>
+                <p:inputText style="width: 100%" value="#{beanNguoiDung.taiKhoanDangNhap.soDienThoai}" placeholder="Số điện thoại ..."/><br/>
+                <p:outputLabel value="Email"/><br/>
+                <p:inputText style="width: 100%; margin-bottom: 20px" value="#{beanNguoiDung.taiKhoanDangNhap.email}" placeholder="Email ..."/><br/>
+                <p:commandButton value="Đăng Ký" update="msg" action="#{beanNguoiDung.dangKy()}" style="width: 100%"/><br/><br/>
+                <span>Nếu đã có tài khoản, </span><p:commandLink value="Đăng Nhập"/>
+            </div>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

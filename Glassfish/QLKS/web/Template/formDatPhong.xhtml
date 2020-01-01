@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <p:dialog id="datphong" widgetVar="dialog_datphong" modal="true" resizable="false" width="600" header="Đặt Phòng" showEffect="fade" hideEffect="fade" closable="true" appendTo="@(body)" style="text-align: center">
+        <h:form>
+            <div class="form-datphong" style="font-size: 14px; font-weight: bold">
+                <h3 style="color: #0077CC">#{beanNavigation.phongDangDat.ten}</h3>
+                <hr style="margin: 12px 0 12px 0"/>
+                <div>#{beanNavigation.phongDangDat.moTa}</div>
+                <hr style="margin: 12px 0 12px 0"/>
+                <div>
+                    <table style="width: 54%; text-align: left; margin: 0 auto">
+                        <tr>
+                            <td style="width: 55%">Tiện nghi:</td>
+                            <td style="width: 45%; color: #8A2BE2">#{beanNavigation.phongDangDat.tienNghi}</td>
+                        </tr>
+                        <tr>
+                            <td>Diện tích:</td>
+                            <td style="color: #669900">#{beanNavigation.phongDangDat.dienTich} m2</td>
+                        </tr>
+                        <tr>
+                            <td>Giá thuê:</td>
+                            <td style="color: #007AD9">#{beanNavigation.phongDangDat.giaThue},000 /ngày</td>
+                        </tr>
+                        <tr>
+                            <td>Phù hợp cho:</td>
+                            <td style="color: #669900">#{beanNavigation.phongDangDat.loaiGiuong + 1} người</td>
+                        </tr>
+                        <tr>
+                            <td>Dịch vụ kèm theo:</td>
+                            <td style="color: #0072C7">#{beanNavigation.datPhong.dichVu}</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr style="margin: 12px 0 12px 0"/>
+                <div>
+                    <table style="width: 54%; text-align: left; margin: 0 auto">
+                        <tr>
+                            <td style="width: 55%">Ngày đặt:</td>
+                            <td style="width: 45%; color: #8A2BE2">#{beanNavigation.strNgayDat}</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày đến:</td>
+                            <td style="color: #8A2BE2">#{beanNavigation.strNgayDen}</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày trả:</td>
+                            <td style="color: #8A2BE2">#{beanNavigation.strNgayTra}</td>
+                        </tr>
+                        <tr>
+                            <td>Bạn sẽ ở trong:</td>
+                            <td style="color: #007AD9">#{beanNavigation.soNgayDatPhong} ngày</td>
+                        </tr>
+                        <tr>
+                            <td>Thành tiền:</td>
+                            <td style="color: #E6004C">#{beanNavigation.strThanhTien} VND</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr style="margin: 12px 0 12px 0"/>
+                <div style="margin-bottom: 14px">
+                    <p:outputLabel value="Ghi Chú Của Bạn"/><br/>
+                    <p:inputTextarea rows="3" cols="48" autoResize="false" value="#{beanNavigation.datPhong.ghiChu}" placeholder="Ghi Chú"/>
+                </div>
+                <p:commandButton value="Đặt Phòng" action="#{beanNavigation.chonDatPhong()}" update="msg form-dsphong" style="width: 40%"/><br/><br/>
+            </div>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

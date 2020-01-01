@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Quản lý Khách sạn</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="Template/template.xhtml">
+                <ui:define name="content">
+
+                    <div style="background-color: #F7F7F7; height: 230px; border: 1px solid #E0E0E0;">
+                        <div class="c80" style="margin-top: 40px">
+                            <h2>Tìm kiếm ưu đãi khách sạn, chỗ nghỉ ...</h2>
+                            <h5>Từ những khu nghỉ dưỡng thanh bình đến những căn hộ hạng sang hiện đại</h5>
+                            <div class="tim-kiem">
+                                <h:form>
+                                    <p:inputText id="a" placeholder="Nhập thành phố" value="#{beanNavigation.tenThanhPhoTimKiem}" />
+                                    <p:datePicker id="b" placeholder="Ngày đến - Ngày trả" selectionMode="range" value="#{beanNavigation.thoiGianTimKiem}" pattern="dd.MM.yyyy" readonlyInput="true"/>
+                                    <h:commandButton value="Tìm" class="btn-timkiem" action="#{beanNavigation.timKiem()}" />
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="c80">
+                        <h2>Tìm theo Thành phố</h2>
+                        <div class="row">
+                            <h:form>
+                                <c:forEach items="#{beanThanhPho.listThanhPho}" var="item" begin="0" end="1">
+                                    <h:commandLink action = "#{beanNavigation.dsTheoThanhPho(item.id)}">
+                                        <div class="col-md-6">
+                                            <div class="div-zoom">
+                                                <img class="img-zoom" src="#{item.urlHinhAnh}" alt="Img"/>
+                                            </div>
+                                            <div class="chu-goc-trai">
+                                                <span style="font-size: 28px; font-weight: bold;">#{item.ten}</span>
+                                                <img src="Content/Images/VietNamFlag.png" alt="VietNam" valign="middle"/>
+                                                <br/>
+                                                <span style="font-size: 16px;">
+                                                    <h:outputText value="#{item.soKhachSan*135}">
+                                                        <f:convertNumber type="number" pattern="#,###"/>
+                                                    </h:outputText>
+                                                    chỗ ở
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </h:commandLink>
+                                </c:forEach>
+                            </h:form>
+                        </div>
+                        <div class="row">
+                            <h:form>
+                                <c:forEach items="#{beanThanhPho.listThanhPho}" var="item" begin="2" end="4">
+                                    <h:commandLink action = "#{beanNavigation.dsTheoThanhPho(item.id)}">
+                                        <div class="col-md-4">
+                                            <div class="div-zoom">
+                                                <img class="img-zoom" src="#{item.urlHinhAnh}" alt="Img"/>
+                                            </div>
+                                            <div class="chu-goc-trai">
+                                                <span style="font-size: 28px; font-weight: bold;">#{item.ten}</span>
+                                                <img src="Content/Images/VietNamFlag.png" alt="VietNam" valign="middle"/>
+                                                <br/>
+                                                <span style="font-size: 16px;">
+                                                    <h:outputText value="#{item.soKhachSan*135}">
+                                                        <f:convertNumber type="number" pattern="#,###"/>
+                                                    </h:outputText>
+                                                    chỗ ở
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </h:commandLink>
+                                </c:forEach>
+                            </h:form>
+                        </div>
+                    </div>
+
+
+                    <div class="c80">
+                        <h2>Tìm theo Loại khách sạn</h2>
+                        <div class="row">
+                            <div class="MultiCarousel" data-items="1,2,3,4" data-slide="1" id="MultiCarousel" data-interval="1000">
+                                <div class="MultiCarousel-inner">
+                                    <h:form>
+                                        <c:forEach items="#{beanLoaiKhachSan.listLoaiKhachSan}" var="item">
+                                            <div class="item">
+                                                <h:commandLink style="text-decoration: none" action = "#{beanNavigation.dsTheoLoaiKhachSan(item.id)}">
+                                                    <div class="img-loaiks"><img src="#{item.urlHinhAnh}" alt="Img"/></div>
+                                                    <br/>
+                                                    <div style="padding-left: 10px;">
+                                                        <span style="font-size: 18px; font-weight: bold">#{item.ten}</span>
+                                                        <br/>
+                                                        <span style="font-size: 16px;">
+                                                            Gồm 
+                                                            <h:outputText value="#{item.soKhachSan*135}">
+                                                                <f:convertNumber type="number" pattern="#,###"/>
+                                                            </h:outputText>
+                                                             khách sạn
+                                                        </span>
+                                                    </div>
+                                                </h:commandLink>
+                                            </div>
+                                        </c:forEach>
+                                    </h:form>
+                                </div>
+                                <button class="btn btn-primary leftLst"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+                                <button class="btn btn-primary rightLst"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="Content/js/carousel.js"></script>
+
+
+                    <div class="c80">
+                        <h2>Các Khách sạn nổi bật</h2>
+                        <div class="row">
+                            <c:forEach items="#{beanKhachSan.listKhachSan}" begin="0" end="3" var="item">
+                                <div class="col-md-3 ks-noibat">
+                                    <h:form>
+                                        <h:commandLink action = "#{beanNavigation.thongTinKhachSan(item.id)}">
+                                            <div class="div-ks">
+                                                <img style="height: 220px" src="Content/Images/KhachSan/#{item.id}.jpg" alt="Img"/>
+                                            </div>
+                                            <div style="font-size: 18px; font-weight: bold; color: #0077CC">#{item.ten}</div>
+                                            <div style="font-size: 14px; color: #777777 ">#{item.tenThanhPho}</div>
+                                            <div style="font-size: 14px; color: #777777">#{item.tenLoaiKhachSan}</div>
+                                            <div style="font-size: 16px; font-weight: bold; color: #003580">#{item.danhGia} &#9733; - #{beanKhachSan.strDanhGia[item.danhGia]}</div>
+                                        </h:commandLink>
+                                    </h:form>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+
